@@ -1,0 +1,102 @@
+============================================
+  GitHub 上傳教學 — piper-zh-en-tts
+============================================
+
+本教學將引導你將「中英混合語音合成」專案上傳到 GitHub。
+
+
+【第一步】在 GitHub 建立倉庫
+----------------------------------------------
+1. 打開 https://github.com 並登入你的帳號
+2. 點擊右上角「+」→「New repository」
+3. 填寫以下欄位：
+   - Repository name: piper-zh-en-tts
+   - Description (可選): 基於 Piper 的中英混合語音合成 Web 應用，支援中英文本自動分段與雙語模型合成
+   - 選擇 Public（公開）或 Private（私有）
+   - ⚠ 不要勾選「Add a README file」
+   - ⚠ 不要勾選「Add .gitignore」
+   - ⚠ 不要勾選「Choose a license」
+4. 點擊「Create repository」
+5. 建立後會看到一個頁面，顯示「…or push an existing repository from the command line」
+   → 複製那三行 git 指令（我們稍後會用到）
+   
+   git remote add origin https://github.com/sujmao/piper-zh-en-tts.git
+git branch -M main
+git push -u origin main
+
+
+【第二步】在本機初始化 Git 並上傳
+----------------------------------------------
+打開終端機（PowerShell 或 CMD），依序執行以下指令：
+
+:: 1. 進入專案目錄
+cd C:\Users\20251020\Downloads\pipertts260502
+
+:: 2. 初始化 Git 倉庫
+git init
+
+:: 3. 設定主分支名稱為 main
+git branch -M main
+
+:: 4. 將所有檔案加入暫存區
+git add .
+
+:: 5. 提交（建立第一個 commit）
+git commit -m "初始提交：中英混合語音合成 Web 應用"
+
+:: 6. 設定遠端倉庫地址（把 YOUR_USERNAME 換成你的 GitHub 使用者名稱）
+git remote add origin https://github.com/YOUR_USERNAME/piper-zh-en-tts.git
+
+git remote add origin https://github.com/sujmao/piper-zh-en-tts.git
+
+
+:: 7. 推送到 GitHub
+git push -u origin main
+
+:: 如果上面的 push 失敗，試試看：
+:: git push --set-upstream origin main
+
+
+【第三步】驗證
+----------------------------------------------
+1. 回到瀏覽器，刷新你的 GitHub 倉庫頁面
+2. 確認檔案都已上傳成功
+3. 確認 models/ 資料夾沒有被上傳（因為 .gitignore 已排除）
+
+
+【常見問題】
+----------------------------------------------
+
+Q: git 不是內部或外部命令？
+A: 需要先安裝 Git for Windows
+   下載地址：https://git-scm.com/download/win
+   安裝時一路按「Next」使用預設選項即可
+
+Q: push 時跳出登入視窗？
+A: GitHub 現在要求用 Personal Access Token 或 SSH 驗證
+   方法一（推薦）：安裝 GitHub CLI → https://cli.github.com
+      安裝後執行 gh auth login，按提示登入
+      之後的 push 指令改用：git push -u origin main
+   方法二：在 GitHub 網站建立 Personal Access Token
+      Settings → Developer settings → Personal access tokens → Tokens (classic)
+      勾選 repo 權限，生成後用 Token 當作密碼
+
+Q: 如果想更新 GitHub 上的程式碼？
+A: 修改檔案後，重複以下三步：
+   git add .
+   git commit -m "描述你改了什麼"
+   git push
+
+
+【專案結構（上傳到 GitHub 的內容）】
+----------------------------------------------
+piper-zh-en-tts/
+├── .gitignore          # Git 忽略規則
+├── app.py              # 主程式（Gradio Web UI）
+├── 使用說明書.txt       # 使用說明
+├── 使用說明書utf8.txt   # 使用說明（UTF-8 編碼）
+├── note.txt            # 開發筆記
+└── GitHub上傳教學.txt   # 本教學文件
+
+注意：models/ 和 __pycache__/ 不會被上傳，
+使用者在執行 app.py 時會自動從 HuggingFace 下載所需模型。

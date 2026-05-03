@@ -1,0 +1,11 @@
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+
+# Piper TTS 模型檔案（從 HuggingFace 執行時下載，不上傳 GitHub）
+models/
+
+# 系統檔案
+.DS_Store
+Thumbs.db
